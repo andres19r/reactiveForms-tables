@@ -2,3 +2,5 @@
 <input type="text" id="name" [formControl]="name" />
 
 <p>Value: {{ name.value }}</p>
+
+<button type="button" (click)="updateName()">Update Name</button>
