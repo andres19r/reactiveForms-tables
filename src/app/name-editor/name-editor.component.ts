@@ -4,18 +4,16 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-name-editor',
   templateUrl: './name-editor.component.html',
-  styleUrls: ['./name-editor.component.css']
+  styleUrls: ['./name-editor.component.css'],
 })
 export class NameEditorComponent implements OnInit {
-  name = new FormControl('')
+  name = new FormControl('');
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   updateName(): void {
-    this.name.setValue('Eduardo')
+    this.name.setValue('Eduardo');
   }
-
 }
