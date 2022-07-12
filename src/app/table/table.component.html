@@ -1,0 +1,82 @@
+<!-- <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Flag</th>
+      <th>Name</th>
+      <th>Population</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let country of countries; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>
+        <img class="small-flag" [src]="country.flags.png" alt="" />
+      </td>
+      <td>{{country.capital}}, {{ country.name.common }}</td>
+      <td>{{ country.population | number }}</td>
+      <td>
+        <a href="#">See</a>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+<!-- <div class="row">
+	<div class="col">
+		<ngx-datatable class="table" [rows]="countries">
+			<ngx-datatable-column name="N.">
+				<ng-template let-rowIndex="rowIndex" let-branch="row" ngx-datatable-cell-template>
+					{{rowIndex + 1}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Name" prop="name.common"></ngx-datatable-column>
+			<ngx-datatable-column name="Capital" prop="capital"></ngx-datatable-column>
+			<ngx-datatable-column name="Population" prop="population"></ngx-datatable-column>
+			<ngx-datatable-column name="CCA2" prop="cca2"></ngx-datatable-column>
+		</ngx-datatable>
+	</div>
+</div> -->
+
+<div class="row">
+	<div class="col">
+		<ngx-datatable
+				class="fullscreen"
+				[footerHeight]="50"
+				[rowHeight]="'auto'"
+				[scrollbarH]="true"
+				[rows]="countries"
+				[limit]="20"
+				[columnMode]="'standard'"
+			  >
+				<ngx-datatable-column name="Name" prop="name.common" [width]="300">
+					<ng-template let-value="value" ngx-datatable-cell-template>
+						<strong>{{value}}</strong>
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="Capital" prop="capital"></ngx-datatable-column>
+				<ngx-datatable-column name="Population" prop="population">
+					<ng-template let-row="row" ngx-datatable-cell-template>
+						<div>{{row.population | number}}</div>
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="CCA2" prop="cca2"></ngx-datatable-column>
+				<ngx-datatable-column [width]="100" name="Flags">
+					<!-- <ng-template ngx-datatable-header-template="">
+						<div>Flags</div>
+					</ng-template> -->
+					<ng-template let-row="row" ngx-datatable-cell-template="">
+						<div class="text-center">
+							<img class="small-flag" [src]="row.flags.png" alt="">
+						</div>
+					</ng-template>
+				</ngx-datatable-column>
+				<!-- <ngx-datatable-column name="Flag" [width]="300" prop="flags.png">
+					<ng-template let-flag="flag" ngx-databable-cell-template>
+						<strong>{{flag}}</strong>
+					</ng-template>
+				</ngx-datatable-column> -->
+		</ngx-datatable>
+	</div>
+</div>
