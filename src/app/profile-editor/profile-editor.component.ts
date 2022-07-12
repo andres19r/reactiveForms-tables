@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -8,7 +8,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./profile-editor.component.css'],
 })
 export class ProfileEditorComponent implements OnInit {
-  profileForm = this.fb.group({
+  profileForm: FormGroup = this.fb.group({
     firstName: ['', Validators.required],
     lastName : [''],
     address  : this.fb.group({
@@ -17,6 +17,9 @@ export class ProfileEditorComponent implements OnInit {
       state : [''],
       zip   : [''],
     }),
+    aliases  : this.fb.array([
+      this.fb.control(''),
+    ]),
   });
 
   response: object = {};
@@ -25,16 +28,25 @@ export class ProfileEditorComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit() {
+  onSubmit(): void {
     this.response = this.profileForm.value;
+    console.log(this.profileForm.value)
   }
 
-  updateProfile() {
+  updateProfile(): void {
     this.profileForm.patchValue({
       firstName: 'Nancy',
       address: {
         street: '123 Drew Street',
       },
     });
+  }
+
+  get aliases(): FormArray {
+    return this.profileForm.get('aliases') as FormArray
+  }
+
+  addAlias(): void {
+    this.aliases.push(this.fb.control(''))
   }
 }

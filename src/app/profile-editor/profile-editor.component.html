@@ -1,33 +1,43 @@
 <form autocomplete="off" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-	<label for="first-name">First Name: </label><br>
-	<input type="text" id="first-name" formControlName="firstName"><br>
+  <label for="first-name">First Name: </label><br />
+  <input type="text" id="first-name" formControlName="firstName" /><br />
 
-	<label for="last-name">Last Name: </label><br>
-	<input type="text" id="last-name" formControlName="lastName">
+  <label for="last-name">Last Name: </label><br />
+  <input type="text" id="last-name" formControlName="lastName" />
 
-	<div formGroupName="address">
-		<h2>Address</h2>
+  <div formGroupName="address">
+    <h2>Address</h2>
 
-		<label for="street">Street: </label><br>
-		<input type="text" id="street" formControlName="street"><br>
+    <label for="street">Street: </label><br />
+    <input type="text" id="street" formControlName="street" /><br />
 
-		<label for="city">City: </label><br>
-		<input type="text" id="city" formControlName="city"><br>
+    <label for="city">City: </label><br />
+    <input type="text" id="city" formControlName="city" /><br />
 
-		<label for="state">State: </label><br>
-		<input type="text" id="state" formControlName="state"><br>
+    <label for="state">State: </label><br />
+    <input type="text" id="state" formControlName="state" /><br />
 
-		<label for="zip">Zip: </label><br>
-		<input type="text" id="zip" formControlName="zip">
+    <label for="zip">Zip: </label><br />
+    <input type="text" id="zip" formControlName="zip" />
+  </div>
 
-	</div>
+  <div formArrayName="aliases">
+    <h2>Aliases</h2>
+    <button type="button" (click)="addAlias()">+ Add another alias</button>
 
-	<p>Complete the form to enable button.</p>
-	<button type="submit" [disabled]="!profileForm.valid">Submit</button>
+    <div *ngFor="let alias of aliases.controls; let i = index">
+      <!-- The repeated alias template -->
+      <label for="alias-{{ i }}">Alias: </label>
+      <input type="text" id="alias-{{ i }}" [formControlName]="i" />
+    </div>
+  </div>
 
-	<button type="button" (click)="updateProfile()">Update Profile</button>
+  <p>Complete the form to enable button.</p>
+  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+
+  <button type="button" (click)="updateProfile()">Update Profile</button>
 </form>
 
-<p>Form status: {{profileForm.status}}</p>
+<p>Form status: {{ profileForm.status }}</p>
 
-<p>{{profileForm.value | json}}</p>
+<p>{{ profileForm.value | json }}</p>
