@@ -19,11 +19,22 @@ export class ProfileEditorComponent implements OnInit {
     })
   });
 
+  response: object = {}
+
   constructor() {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    console.warn(this.profileForm.value)
+    this.response = this.profileForm.value
+  }
+
+  updateProfile() {
+    this.profileForm.patchValue({
+      firstName: 'Nancy',
+      address: {
+        street: '123 Drew Street'
+      }
+    })
   }
 }
